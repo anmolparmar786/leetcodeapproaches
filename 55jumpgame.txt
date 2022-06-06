@@ -1,0 +1,48 @@
+Problem name:- Jump Game 1
+Problem Number:- 55
+Problem Statement :-
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you can reach the last index.
+
+Example:-
+Example1.)
+Input: nums = [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+Example2.)
+Input: nums = [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+
+Constraints:-
+*1 <= nums.length <= 3 * 10^4
+*0 <= nums[i][j] <= 10^5
+
+Approach to the Solution:-
+Firstly,here we have to check whether we can go to the last array element or not.
+We do not have to calculate the number of steps needed to go to the last array element
+Firstly,we will start with the first element of the array and forward with one step each time and we also declare a max variable which is for the maximum step we can reach out.
+E.g.: We are at index 3 and the number at index 3 is 4 so the maximum we can reach from here is index 3+4=7.
+So, we keep updating maxReach in each iteration. Also, we keep checking that the loop variable m should be less than maxReach always otherwise we are at an index which was not within our reach i.e. we cannot reach the last element. So, we break out if m exceed maxReach.
+
+Code:-
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int m= 0, maxReach=0;
+    while(m<nums.size() && m<=maxReach){
+        maxReach = max(m + nums[m], maxReach);
+        m++;
+    }
+    if(m == nums.size())
+        return true;
+    return false;
+    }
+};
+
+Time Complexity:-O(N)
+
+Here,We keep updating maxReach and our conditions do the rest of the job. As soon as we reach the end of the array or we surpass maxReach loop stops. So, if we have reached the end of the array we would be at array’s length which we wanted. Otherwise, we were not able to reach the last element of the array.
